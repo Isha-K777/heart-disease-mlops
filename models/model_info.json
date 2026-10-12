@@ -1,7 +1,7 @@
 {
   "model_name": "logistic_regression",
-  "version": "20261012102414",
-  "trained_at": "2026-10-12T10:24:14.736007+00:00",
+  "version": "20261012130345",
+  "trained_at": "2026-10-12T13:03:45.421982+00:00",
   "selection_metric": "nested-CV ROC-AUC",
   "sklearn_version": "1.5.2",
   "python_version": "3.12.10",
@@ -20,10 +20,10 @@
     "ca",
     "thal"
   ],
-  "mlflow_run_id": "a75b94e94f224e13805a00e9a9514bff",
+  "mlflow_run_id": "cde42d24e3f442a7b466f0d7700019b2",
   "results": {
     "logistic_regression": {
-      "run_id": "a75b94e94f224e13805a00e9a9514bff",
+      "run_id": "cde42d24e3f442a7b466f0d7700019b2",
       "cv": {
         "accuracy": {
           "mean": 0.8305272108843538,
@@ -59,7 +59,7 @@
       }
     },
     "random_forest": {
-      "run_id": "9690706d8e5e48a89db24be69e4e5494",
+      "run_id": "3a3caaa05d9e4bcc9e98ef049566e017",
       "cv": {
         "accuracy": {
           "mean": 0.8057823129251702,
@@ -96,7 +96,7 @@
       }
     },
     "gradient_boosting": {
-      "run_id": "a391259f035b4cb3a534c205b4132c18",
+      "run_id": "aa315f1a06bf4a6f83c396e5649a8fa1",
       "cv": {
         "accuracy": {
           "mean": 0.8055272108843538,
