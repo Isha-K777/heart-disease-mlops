@@ -1,0 +1,19 @@
+params,mean_test_score,std_test_score,rank_test_score
+"{'clf__max_depth': None, 'clf__min_samples_leaf': 5, 'clf__n_estimators': 200}",0.8995676437536902,0.015500201939911777,1
+"{'clf__max_depth': 10, 'clf__min_samples_leaf': 5, 'clf__n_estimators': 200}",0.8995676437536902,0.015500201939911777,1
+"{'clf__max_depth': 5, 'clf__min_samples_leaf': 3, 'clf__n_estimators': 400}",0.8991486200788527,0.01643007958960851,3
+"{'clf__max_depth': 5, 'clf__min_samples_leaf': 5, 'clf__n_estimators': 200}",0.8985200845665963,0.01695592722479723,4
+"{'clf__max_depth': 10, 'clf__min_samples_leaf': 5, 'clf__n_estimators': 400}",0.8983534274231949,0.01303511532244798,5
+"{'clf__max_depth': None, 'clf__min_samples_leaf': 5, 'clf__n_estimators': 400}",0.8983534274231949,0.01303511532244798,5
+"{'clf__max_depth': 10, 'clf__min_samples_leaf': 3, 'clf__n_estimators': 400}",0.8973201531341065,0.013408221562230425,7
+"{'clf__max_depth': None, 'clf__min_samples_leaf': 3, 'clf__n_estimators': 400}",0.8973201531341065,0.013408221562230425,7
+"{'clf__max_depth': None, 'clf__min_samples_leaf': 3, 'clf__n_estimators': 200}",0.8971249261946935,0.012147295447097297,9
+"{'clf__max_depth': 10, 'clf__min_samples_leaf': 3, 'clf__n_estimators': 200}",0.8971249261946935,0.012147295447097297,9
+"{'clf__max_depth': 5, 'clf__min_samples_leaf': 5, 'clf__n_estimators': 400}",0.8969058910919377,0.013382019461646822,11
+"{'clf__max_depth': 5, 'clf__min_samples_leaf': 3, 'clf__n_estimators': 200}",0.8967011408871874,0.013517571533329035,12
+"{'clf__max_depth': None, 'clf__min_samples_leaf': 1, 'clf__n_estimators': 200}",0.8941131935317982,0.015016330488445528,13
+"{'clf__max_depth': 10, 'clf__min_samples_leaf': 1, 'clf__n_estimators': 200}",0.893401329447841,0.015467188756841055,14
+"{'clf__max_depth': 5, 'clf__min_samples_leaf': 1, 'clf__n_estimators': 200}",0.8915538159724207,0.0131023190852201,15
+"{'clf__max_depth': 5, 'clf__min_samples_leaf': 1, 'clf__n_estimators': 400}",0.8907062453574083,0.015393955595599444,16
+"{'clf__max_depth': 10, 'clf__min_samples_leaf': 1, 'clf__n_estimators': 400}",0.8899848580081139,0.01791174412218517,17
+"{'clf__max_depth': None, 'clf__min_samples_leaf': 1, 'clf__n_estimators': 400}",0.8898872445384073,0.017585670964395374,18

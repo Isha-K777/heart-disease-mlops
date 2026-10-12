@@ -1,0 +1,29 @@
+{
+  "rows": 303,
+  "columns": 14,
+  "class_counts": {
+    "0": 164,
+    "1": 139
+  },
+  "positive_rate": 0.45874587458745875,
+  "missing_values": {
+    "ca": 4,
+    "thal": 2
+  },
+  "top_correlations_with_target": {
+    "thal": 0.526,
+    "ca": 0.46,
+    "exang": 0.432,
+    "oldpeak": 0.425,
+    "thalach": -0.417,
+    "cp": 0.414
+  },
+  "figures": [
+    "eda_class_balance.png",
+    "eda_missing_values.png",
+    "eda_numeric_histograms.png",
+    "eda_numeric_boxplots.png",
+    "eda_categorical_counts.png",
+    "eda_correlation_heatmap.png"
+  ]
+}

@@ -1,0 +1,111 @@
+name: CI/CD pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  lint:
+    name: Lint (flake8)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - run: pip install flake8==7.1.1
+      - name: flake8
+        run: flake8 src tests scripts --count --statistics --show-source
+
+  test:
+    name: Unit tests (pytest)
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: pytest with coverage
+        run: pytest --cov=src --cov-report=xml --cov-report=term-missing --junitxml=pytest-report.xml
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            pytest-report.xml
+            coverage.xml
+
+  train:
+    name: Train & track model
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Get & clean data
+        run: python scripts/download_data.py
+      - name: EDA
+        run: python -m src.eda
+      - name: Train (MLflow tracking)
+        run: python -m src.train
+      - name: Job summary
+        run: |
+          echo "### Model comparison" >> "$GITHUB_STEP_SUMMARY"
+          cat reports/model_comparison.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload model, MLflow runs and plots
+        uses: actions/upload-artifact@v4
+        with:
+          name: training-artifacts
+          path: |
+            models/
+            mlruns/
+            reports/
+            data/processed/
+
+  docker:
+    name: Build image & smoke-test container
+    runs-on: ubuntu-latest
+    needs: train
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: training-artifacts
+          path: .
+      - name: Build image
+        run: docker build -t heart-disease-api:${{ github.sha }} .
+      - name: Run container
+        run: docker run -d --name api -p 8000:8000 heart-disease-api:${{ github.sha }}
+      - name: Wait for health
+        run: |
+          for i in $(seq 1 30); do
+            curl -fs http://localhost:8000/health && exit 0
+            sleep 2
+          done
+          echo "API did not become healthy"; docker logs api; exit 1
+      - name: Smoke test /predict
+        run: bash scripts/smoke_test.sh http://localhost:8000
+      - name: Container logs
+        if: always()
+        run: docker logs api > container.log 2>&1 || true
+      - name: Upload container log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: container-log
+          path: container.log
