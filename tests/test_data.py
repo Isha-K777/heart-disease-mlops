@@ -42,6 +42,3 @@ def test_split_xy(clean_df):
     assert list(X.columns) == FEATURE_COLUMNS
     assert len(X) == len(y)
 
-
-def test_deliberate_failure():
-    assert 1 == 2
